@@ -7,3 +7,4 @@ pluginManagement {
 rootProject.name = "Sage"
 include(":web")
 include(":android")
+include(":common")
