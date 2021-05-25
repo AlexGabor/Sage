@@ -39,12 +39,12 @@ repositories {
 dependencies {
     implementation(project(":common"))
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
-    implementation("androidx.core:core-ktx:1.3.2")
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("com.google.android.material:material:1.3.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
-    testImplementation("junit:junit:4.+")
-    androidTestImplementation("androidx.test.ext:junit:1.1.2")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    implementation(libs.kotlinx.coroutines)
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.android.material)
+    testImplementation(libs.test.junit)
+    androidTestImplementation(libs.test.androidx.junit)
+    androidTestImplementation(libs.test.androidx.espresso)
 }
