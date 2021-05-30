@@ -21,7 +21,7 @@ fun RecipeDetailScreen(pathname: String, onNotFound: () -> Unit) {
     val getRecipes = remember { GetRecipes() }
     val recipes by getRecipes.recipes.collectAsState()
 
-    val recipe = recipes.find { it.name.toPathname() == pathname }
+    val recipe = remember(pathname) { recipes.find { it.name.toPathname() == pathname } }
 
     if (recipe != null) {
         RecipeDetailScreen(recipe)

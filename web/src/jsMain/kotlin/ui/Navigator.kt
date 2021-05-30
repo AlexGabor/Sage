@@ -1,43 +1,77 @@
 package ui
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import kotlinx.browser.window
 import com.alexgabor.common.model.Recipe as RecipeModel
 
-@Composable
-fun Navigator() {
-    val screen = remember { mutableStateOf<Screen>(Screen.List) }
+class NavigatorState {
+    private val backstack = mutableListOf<Screen>()
+    private val _screen: MutableState<Screen> = mutableStateOf(Screen.List)
+    val screen: State<Screen> = _screen
 
-    LaunchedEffect(Unit) {
+    init {
+        evaluateLocation()
+        setOnBackListener()
+    }
+
+    fun navigateTo(screen: Screen) {
+        window.history.pushState(screen, screen.title, url = screen.url)
+        backstack.add(this._screen.value)
+        this._screen.value = screen
+    }
+
+    fun goBack() {
+        window.history.back()
+    }
+
+    fun redirectToRoot() {
+        window.history.replaceState(Screen.List, Screen.List.title, Screen.List.url)
+        _screen.value = Screen.List
+    }
+
+    private fun evaluateLocation() {
         console.log(window.location.pathname)
         val segments = window.location.pathname.split("/").filter { it.isNotEmpty() }
         if (window.location.pathname.isNotEmpty() && segments.size == 1) {
-            screen.value = Screen.RecipeLink(segments[0])
+            navigateTo(Screen.RecipeLink(segments[0]))
         } else {
-            window.history.replaceState(window.history.state, "Recipes", "/")
+            redirectToRoot()
         }
     }
 
-    window.onpopstate = {
-        screen.value = Screen.List
-        Unit
+    private fun setOnBackListener() {
+        window.onpopstate = {
+            _screen.value = if (backstack.isNotEmpty()) {
+                backstack.removeLast()
+            } else {
+                Screen.List
+            }
+            Unit
+        }
     }
+}
 
-    when (val s = screen.value) {
+@Composable
+fun rememberNavigatorState(): NavigatorState = remember { NavigatorState() }
+
+@Composable
+fun Navigator() {
+    val navigatorState = rememberNavigatorState()
+
+    when (val screen = navigatorState.screen.value) {
         Screen.List -> RecipeListScreen(onClick = { recipe ->
-            window.history.pushState(recipe, recipe.name, recipe.name.toPathname())
-            screen.value = Screen.Recipe(recipe)
+            navigatorState.navigateTo(Screen.Recipe(recipe))
         })
         is Screen.Recipe -> {
-            RecipeDetailScreen(s.recipe)
+            RecipeDetailScreen(screen.recipe)
         }
         is Screen.RecipeLink -> {
-            RecipeDetailScreen(s.pathname) {
-                window.history.replaceState(window.history.state, "Recipes", "/")
-                screen.value = Screen.List
+            RecipeDetailScreen(screen.pathname) {
+                navigatorState.redirectToRoot()
             }
         }
     }
@@ -47,9 +81,9 @@ fun String.toPathname(): String {
     return this.toLowerCase().replace(" ", "-")
 }
 
-sealed class Screen {
-    object List : Screen()
-    class Recipe(val recipe: RecipeModel) : Screen()
-    class RecipeLink(val pathname: String) : Screen()
+sealed class Screen(val title: String, val url: String) {
+    object List : Screen("Recipes", "/")
+    class Recipe(val recipe: RecipeModel) : Screen(recipe.name, recipe.name.toPathname())
+    class RecipeLink(val pathname: String) : Screen("", pathname)
 }
 
