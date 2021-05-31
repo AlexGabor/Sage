@@ -1,8 +1,8 @@
 import androidx.compose.web.renderComposable
-import ui.Navigator
+import ui.SageApp
 
 fun main() {
     renderComposable(rootElementId = "root") {
-        Navigator()
+        SageApp()
     }
 }
