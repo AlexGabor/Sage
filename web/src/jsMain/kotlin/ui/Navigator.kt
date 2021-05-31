@@ -9,18 +9,16 @@ import kotlinx.browser.window
 import com.alexgabor.common.model.Recipe as RecipeModel
 
 class NavigatorState {
-    private val backstack = mutableListOf<Screen>()
     private val _screen: MutableState<Screen> = mutableStateOf(Screen.List)
     val screen: State<Screen> = _screen
 
     init {
-        evaluateLocation()
+        evaluateLocation(window.location.pathname)
         setOnBackListener()
     }
 
     fun navigateTo(screen: Screen) {
         window.history.pushState(screen, screen.title, url = screen.url)
-        backstack.add(this._screen.value)
         this._screen.value = screen
     }
 
@@ -33,24 +31,18 @@ class NavigatorState {
         _screen.value = Screen.List
     }
 
-    private fun evaluateLocation() {
-        console.log(window.location.pathname)
-        val segments = window.location.pathname.split("/").filter { it.isNotEmpty() }
-        if (window.location.pathname.isNotEmpty() && segments.size == 1) {
-            navigateTo(Screen.RecipeLink(segments[0]))
+    private fun evaluateLocation(pathname: String) {
+        val segments = pathname.split("/").filter { it.isNotEmpty() }
+        if (pathname.isNotEmpty() && segments.size == 1) {
+            _screen.value = Screen.RecipeLink(segments[0])
         } else {
-            redirectToRoot()
+            _screen.value = Screen.List
         }
     }
 
     private fun setOnBackListener() {
         window.onpopstate = {
-            _screen.value = if (backstack.isNotEmpty()) {
-                backstack.removeLast()
-            } else {
-                Screen.List
-            }
-            Unit
+            evaluateLocation(window.location.pathname)
         }
     }
 }
