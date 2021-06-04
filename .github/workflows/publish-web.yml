@@ -1,0 +1,37 @@
+name: Publish Web
+on: [workflow_dispatch]
+jobs:
+  publish:
+    name: Build Web
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Fetch Sources
+        uses: actions/checkout@v2
+
+      - name: Check Tag
+        run: |
+          git fetch --tags
+          git describe --exact-match --tags HEAD
+
+      - name: Save Tag Name
+        id: tag
+        run: echo "::set-output name=tag::$(git describe --exact-match --tags HEAD)"
+
+      - name: Test and Build
+        run: ./gradlew web:buildGhPages
+
+      # If main branch update, deploy to gh-pages
+      - name: Publish
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: web/build/ghPages # The folder the action should deploy.
+          CLEAN: true # Automatically remove deleted files from the deploy branch
+          CLEAN_EXCLUDE: "CNAME" # Automatically remove deleted files from the deploy branch
+          COMMIT_MESSAGE: "Release ${{ steps.tag.outputs.tag }}"

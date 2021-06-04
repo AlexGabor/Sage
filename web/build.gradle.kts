@@ -26,4 +26,19 @@ kotlin {
     }
 }
 
+tasks.register<Copy>("build404page") {
+    dependsOn("build")
+    from(layout.buildDirectory.file("distributions/index.html"))
+    rename("index.html", "distributions/404.html")
+    into(layout.buildDirectory)
+}
+
+tasks.register<Copy>("buildGhPages") {
+    dependsOn("build404page")
+    mkdir(layout.buildDirectory.dir("ghPages"))
+    from(layout.buildDirectory.dir("distributions"))
+    exclude("**/*.map")
+    into(layout.buildDirectory.dir("ghPages"))
+}
+
 task("wrapper") // TODO why?
