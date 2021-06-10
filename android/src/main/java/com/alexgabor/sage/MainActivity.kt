@@ -1,18 +1,17 @@
 package com.alexgabor.sage
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import com.alexgabor.common.usecase.GetRecipes
+import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import com.alexgabor.sage.ui.SageApp
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val getRecipes = GetRecipes()
-        getRecipes.recipes.value.let {
-            Toast.makeText(this, "$it", Toast.LENGTH_LONG).show()
+        setContent {
+            SageApp()
         }
     }
 }

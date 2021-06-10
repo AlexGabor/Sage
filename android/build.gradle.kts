@@ -29,6 +29,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        compose = true
+    }
 }
 
 repositories {
@@ -43,7 +46,10 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.android.material)
+
+    implementation(libs.bundles.androidx.compose)
+    implementation(libs.android.accompanist)
+
     testImplementation(libs.test.junit)
     androidTestImplementation(libs.test.androidx.junit)
     androidTestImplementation(libs.test.androidx.espresso)
