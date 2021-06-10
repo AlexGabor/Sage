@@ -70,7 +70,7 @@ fun Navigator() {
 }
 
 fun String.toPathname(): String {
-    return this.toLowerCase().replace(" ", "-")
+    return this.lowercase().replace(" ", "-")
 }
 
 sealed class Screen(val title: String, val url: String) {

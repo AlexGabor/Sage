@@ -4,39 +4,40 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.web.css.Color
-import androidx.compose.web.css.backgroundColor
-import androidx.compose.web.css.height
-import androidx.compose.web.css.marginLeft
-import androidx.compose.web.css.marginTop
-import androidx.compose.web.css.px
-import androidx.compose.web.css.value
-import androidx.compose.web.elements.Div
-import androidx.compose.web.elements.H1
-import androidx.compose.web.elements.P
-import androidx.compose.web.elements.Text
 import com.alexgabor.common.model.Ingredient
 import com.alexgabor.common.model.Recipe
 import com.alexgabor.common.usecase.GetRecipes
 import com.alexgabor.sage.ui.catalog.AppTitle
+import org.jetbrains.compose.common.foundation.layout.Box
+import org.jetbrains.compose.common.internal.castOrCreate
+import org.jetbrains.compose.common.material.Text
+import org.jetbrains.compose.common.ui.Modifier
+import org.jetbrains.compose.web.css.Color
+import org.jetbrains.compose.web.css.backgroundColor
+import org.jetbrains.compose.web.css.height
+import org.jetbrains.compose.web.css.marginLeft
+import org.jetbrains.compose.web.css.marginTop
+import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.dom.H1
+import org.jetbrains.compose.web.dom.P
 
 @Composable
 fun RecipeDetailScreen(recipe: Recipe) {
-    Div(style = {
-        property("max-width", value(680.px))
-        property("margin", value("0 auto"))
+    Box(Modifier.castOrCreate().apply {
+        add {
+            property("max-width", 680.px)
+            property("margin", "0 auto")
+        }
     }) {
-        Div(style = {
-            marginLeft(16.px)
-            property("margin-right", value(16.px))
+        Box(Modifier.castOrCreate().apply {
+            add {
+                marginLeft(16.px)
+                property("margin-right", 16.px)
+            }
         }) {
-            Div(style = {
-                height(16.px)
-            }) { }
+            Box(Modifier.castOrCreate().apply { add { height(16.px) } }) { }
             AppTitle()
-            Div(style = {
-                height(16.px)
-            }) { }
+            Box(Modifier.castOrCreate().apply { add { height(16.px) } }) { }
             RecipeTitle(recipe.name)
             Ingredients(recipe.ingredients)
             Steps(recipe.steps)
@@ -46,8 +47,10 @@ fun RecipeDetailScreen(recipe: Recipe) {
 
 @Composable
 fun Ingredients(ingredients: List<Ingredient>) {
-    Div(style = {
-        marginTop(16.px)
+    Box(Modifier.castOrCreate().apply {
+        add {
+            marginTop(16.px)
+        }
     }) {
         ingredients.forEach {
             P { Text("${it.quantity} ${it.name}") }
@@ -57,8 +60,10 @@ fun Ingredients(ingredients: List<Ingredient>) {
 
 @Composable
 fun Steps(steps: List<String>) {
-    Div(style = {
-        marginTop(16.px)
+    Box(Modifier.castOrCreate().apply {
+        add {
+            marginTop(16.px)
+        }
     }) {
         steps.forEachIndexed { index, step ->
             P {
@@ -86,9 +91,11 @@ fun RecipeDetailScreen(pathname: String, onNotFound: () -> Unit) {
 
 @Composable
 fun RecipeTitle(text: String) {
-    Div(style = {
-        backgroundColor(Color.Named("#494949"))
-        height(1.px)
+    Box(Modifier.castOrCreate().apply {
+        add {
+            backgroundColor(Color.Named("#494949"))
+            height(1.px)
+        }
     }) {
     }
     H1 {

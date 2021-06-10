@@ -1,7 +1,7 @@
 // Add compose gradle plugin
 plugins {
     kotlin("multiplatform")
-    id("org.jetbrains.compose") version "0.0.0-web-dev-11"
+    id("org.jetbrains.compose") version "0.5.0-build224"
 }
 
 // Add maven repositories
@@ -19,7 +19,8 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 implementation(project(":common"))
-                implementation(compose.web.web)
+                implementation(compose.web.core)
+                implementation(compose.web.widgets)
                 implementation(compose.runtime)
             }
         }
