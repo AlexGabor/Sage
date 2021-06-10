@@ -1,4 +1,4 @@
-package ui
+package com.alexgabor.sage.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.web.css.percent

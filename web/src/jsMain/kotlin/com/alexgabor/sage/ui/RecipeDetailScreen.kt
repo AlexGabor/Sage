@@ -1,4 +1,4 @@
-package ui
+package com.alexgabor.sage.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -18,7 +18,7 @@ import androidx.compose.web.elements.Text
 import com.alexgabor.common.model.Ingredient
 import com.alexgabor.common.model.Recipe
 import com.alexgabor.common.usecase.GetRecipes
-import ui.catalog.AppTitle
+import com.alexgabor.sage.ui.catalog.AppTitle
 
 @Composable
 fun RecipeDetailScreen(recipe: Recipe) {

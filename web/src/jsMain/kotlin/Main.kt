@@ -1,5 +1,5 @@
 import androidx.compose.web.renderComposable
-import ui.SageApp
+import com.alexgabor.sage.ui.SageApp
 
 fun main() {
     renderComposable(rootElementId = "root") {

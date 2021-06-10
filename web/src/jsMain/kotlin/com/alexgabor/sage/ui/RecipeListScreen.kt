@@ -1,4 +1,4 @@
-package ui
+package com.alexgabor.sage.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -16,7 +16,7 @@ import com.alexgabor.common.usecase.GetRecipes
 import org.jetbrains.compose.common.foundation.clickable
 import org.jetbrains.compose.common.material.Text
 import org.jetbrains.compose.common.ui.Modifier
-import ui.catalog.AppTitle
+import com.alexgabor.sage.ui.catalog.AppTitle
 
 @Composable
 fun RecipeListScreen(onClick: (recipe: Recipe) -> Unit) {

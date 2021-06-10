@@ -1,4 +1,4 @@
-package ui.catalog
+package com.alexgabor.sage.ui.catalog
 
 import androidx.compose.runtime.Composable
 import androidx.compose.web.css.Color
