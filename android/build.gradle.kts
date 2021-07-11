@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("org.jetbrains.compose") version "0.5.0-build235"
 }
 
 android {
@@ -29,15 +30,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.androidx.compose.get()
-    }
 }
 
 repositories {
+    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     google()
     mavenCentral()
 }
@@ -50,7 +46,9 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
 
-    implementation(libs.bundles.androidx.compose)
+    implementation(compose.runtime)
+    implementation(compose.foundation)
+    implementation(libs.androidx.compose.activity)
     implementation(libs.android.accompanist)
 
     testImplementation(libs.test.junit)
