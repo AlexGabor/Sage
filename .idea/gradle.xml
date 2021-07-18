@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/android" />
             <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/commonUi" />
             <option value="$PROJECT_DIR$/web" />
           </set>
         </option>
@@ -28,6 +29,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/android" />
             <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/commonUi" />
             <option value="$PROJECT_DIR$/web" />
           </set>
         </option>

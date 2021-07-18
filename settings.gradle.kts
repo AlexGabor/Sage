@@ -8,6 +8,7 @@ rootProject.name = "Sage"
 include(":web")
 include(":android")
 include(":common")
+include(":commonUi")
 
 
 // Enable Gradle's version catalog support
