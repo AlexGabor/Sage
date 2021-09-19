@@ -7,42 +7,27 @@ import androidx.compose.runtime.remember
 import com.alexgabor.common.model.Ingredient
 import com.alexgabor.common.model.Recipe
 import com.alexgabor.common.usecase.GetRecipes
+import com.alexgabor.commonui.catalog.ScreenFrame
+import com.alexgabor.commonui.catalog.VerticalSpace
 import com.alexgabor.commonui.catalog.typography.Subtitle
 import com.alexgabor.commonui.catalog.typography.Title
 import org.jetbrains.compose.common.foundation.layout.Box
 import org.jetbrains.compose.common.internal.castOrCreate
 import org.jetbrains.compose.common.material.Text
 import org.jetbrains.compose.common.ui.Modifier
-import org.jetbrains.compose.web.css.Color
-import org.jetbrains.compose.web.css.backgroundColor
-import org.jetbrains.compose.web.css.height
-import org.jetbrains.compose.web.css.marginLeft
 import org.jetbrains.compose.web.css.marginTop
 import org.jetbrains.compose.web.css.px
-import org.jetbrains.compose.web.dom.H1
 import org.jetbrains.compose.web.dom.P
 
 @Composable
 fun RecipeDetailScreen(recipe: Recipe) {
-    Box(Modifier.castOrCreate().apply {
-        add {
-            property("max-width", 680.px)
-            property("margin", "0 auto")
-        }
-    }) {
-        Box(Modifier.castOrCreate().apply {
-            add {
-                marginLeft(16.px)
-                property("margin-right", 16.px)
-            }
-        }) {
-            Box(Modifier.castOrCreate().apply { add { height(16.px) } }) { }
-            Title("Sage")
-            Box(Modifier.castOrCreate().apply { add { height(16.px) } }) { }
-            Subtitle(recipe.name)
-            Ingredients(recipe.ingredients)
-            Steps(recipe.steps)
-        }
+    ScreenFrame {
+        VerticalSpace(16)
+        Title("Sage")
+        VerticalSpace(16)
+        Subtitle(recipe.name)
+        Ingredients(recipe.ingredients)
+        Steps(recipe.steps)
     }
 }
 

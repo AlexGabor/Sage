@@ -20,12 +20,14 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(project(":common"))
                 implementation(libs.kotlinx.coroutines)
                 implementation(compose.runtime)
             }
         }
         val jsMain by getting {
             dependencies {
+                implementation(project(":common"))
                 implementation(compose.web.core)
                 implementation(compose.web.widgets)
                 implementation(compose.runtime)
@@ -33,6 +35,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
+                implementation(project(":common"))
                 implementation(compose.runtime)
                 implementation(compose.foundation)
             }
