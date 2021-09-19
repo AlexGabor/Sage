@@ -19,6 +19,7 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 implementation(project(":common"))
+                implementation(project(":commonUi"))
                 implementation(compose.web.core)
                 implementation(compose.web.widgets)
                 implementation(compose.runtime)

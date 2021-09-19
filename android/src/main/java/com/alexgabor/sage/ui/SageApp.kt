@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.alexgabor.sage.ui.catalog.AppTitle
+import com.alexgabor.commonui.catalog.typography.Title
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.statusBarsPadding
 
@@ -22,7 +22,7 @@ fun SageApp() {
             Column(Modifier
                 .statusBarsPadding()
                 .padding(16.dp)) {
-                AppTitle()
+                Title("Sage")
             }
         }
     }

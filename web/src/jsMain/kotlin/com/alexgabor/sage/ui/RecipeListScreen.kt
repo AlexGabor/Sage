@@ -6,10 +6,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import com.alexgabor.common.model.Recipe
 import com.alexgabor.common.usecase.GetRecipes
+import com.alexgabor.commonui.catalog.typography.Title
 import org.jetbrains.compose.common.foundation.clickable
 import org.jetbrains.compose.common.material.Text
 import org.jetbrains.compose.common.ui.Modifier
-import com.alexgabor.sage.ui.catalog.AppTitle
 import org.jetbrains.compose.common.foundation.layout.Box
 import org.jetbrains.compose.common.internal.castOrCreate
 import org.jetbrains.compose.web.css.height
@@ -36,7 +36,7 @@ fun RecipeListScreen(onClick: (recipe: Recipe) -> Unit) {
             }
         }) {
             Box(Modifier.castOrCreate().apply { add { height(16.px) } }) { }
-            AppTitle()
+            Title("Sage")
             RecipeList(recipes, onClick)
         }
     }

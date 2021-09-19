@@ -40,6 +40,7 @@ repositories {
 
 dependencies {
     implementation(project(":common"))
+    implementation(project(":commonUi"))
 
     implementation(libs.kotlinx.coroutines)
     implementation(libs.androidx.core)

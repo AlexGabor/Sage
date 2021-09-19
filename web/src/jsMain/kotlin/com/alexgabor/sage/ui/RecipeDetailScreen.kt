@@ -7,7 +7,8 @@ import androidx.compose.runtime.remember
 import com.alexgabor.common.model.Ingredient
 import com.alexgabor.common.model.Recipe
 import com.alexgabor.common.usecase.GetRecipes
-import com.alexgabor.sage.ui.catalog.AppTitle
+import com.alexgabor.commonui.catalog.typography.Subtitle
+import com.alexgabor.commonui.catalog.typography.Title
 import org.jetbrains.compose.common.foundation.layout.Box
 import org.jetbrains.compose.common.internal.castOrCreate
 import org.jetbrains.compose.common.material.Text
@@ -36,9 +37,9 @@ fun RecipeDetailScreen(recipe: Recipe) {
             }
         }) {
             Box(Modifier.castOrCreate().apply { add { height(16.px) } }) { }
-            AppTitle()
+            Title("Sage")
             Box(Modifier.castOrCreate().apply { add { height(16.px) } }) { }
-            RecipeTitle(recipe.name)
+            Subtitle(recipe.name)
             Ingredients(recipe.ingredients)
             Steps(recipe.steps)
         }
@@ -86,19 +87,5 @@ fun RecipeDetailScreen(pathname: String, onNotFound: () -> Unit) {
         RecipeDetailScreen(recipe)
     } else {
         onNotFound()
-    }
-}
-
-@Composable
-fun RecipeTitle(text: String) {
-    Box(Modifier.castOrCreate().apply {
-        add {
-            backgroundColor(Color.Named("#494949"))
-            height(1.px)
-        }
-    }) {
-    }
-    H1 {
-        Text(text)
     }
 }
