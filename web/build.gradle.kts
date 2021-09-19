@@ -1,7 +1,7 @@
 // Add compose gradle plugin
 plugins {
     kotlin("multiplatform")
-    id("org.jetbrains.compose") version "0.5.0-build235"
+    id("org.jetbrains.compose") version "1.0.0-alpha4-build348"
 }
 
 // Add maven repositories
@@ -14,6 +14,9 @@ kotlin {
     js(IR) {
         browser()
         binaries.executable()
+    }
+    sourceSets.all {
+        languageSettings.optIn("org.jetbrains.compose.common.ui.ExperimentalComposeWebWidgetsApi")
     }
     sourceSets {
         val jsMain by getting {

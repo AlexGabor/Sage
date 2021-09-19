@@ -13,7 +13,7 @@ import org.jetbrains.compose.web.css.px
 actual fun Divider(size: Int) {
     Box(Modifier.castOrCreate().apply {
         add {
-            backgroundColor(Color.Named("#494949"))
+            backgroundColor(Color("#494949"))
             height(size.px)
         }
     }) {
