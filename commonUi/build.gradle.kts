@@ -1,7 +1,7 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    id("org.jetbrains.compose") version "1.0.0-beta5"
+    id("org.jetbrains.compose") version "1.0.1-rc2"
 }
 
 
@@ -32,7 +32,6 @@ kotlin {
             dependencies {
                 implementation(project(":common"))
                 implementation(compose.web.core)
-                implementation(compose.web.widgets)
                 implementation(compose.runtime)
             }
         }

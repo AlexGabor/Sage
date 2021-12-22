@@ -1,6 +1,6 @@
 [versions]
-kotlin = "1.5.31"
-kotlinx-coroutines = "1.5.0"
+kotlin = "1.6.10"
+kotlinx-coroutines = "1.6.0"
 
 androidBuildTools = "7.0.2"
 androidx-core = "1.6.0"

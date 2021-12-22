@@ -11,13 +11,11 @@ import com.alexgabor.commonui.catalog.ScreenFrame
 import com.alexgabor.commonui.catalog.VerticalSpace
 import com.alexgabor.commonui.catalog.typography.Subtitle
 import com.alexgabor.commonui.catalog.typography.Title
-import org.jetbrains.compose.common.foundation.layout.Box
-import org.jetbrains.compose.common.internal.castOrCreate
-import org.jetbrains.compose.common.material.Text
-import org.jetbrains.compose.common.ui.Modifier
 import org.jetbrains.compose.web.css.marginTop
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.P
+import org.jetbrains.compose.web.dom.Text
 
 @Composable
 fun RecipeDetailScreen(recipe: Recipe) {
@@ -33,11 +31,7 @@ fun RecipeDetailScreen(recipe: Recipe) {
 
 @Composable
 fun Ingredients(ingredients: List<Ingredient>) {
-    Box(Modifier.castOrCreate().apply {
-        add {
-            marginTop(16.px)
-        }
-    }) {
+    Div({ style { marginTop(16.px) } }) {
         ingredients.forEach {
             P { Text("${it.quantity} ${it.name}") }
         }
@@ -46,14 +40,9 @@ fun Ingredients(ingredients: List<Ingredient>) {
 
 @Composable
 fun Steps(steps: List<String>) {
-    Box(Modifier.castOrCreate().apply {
-        add {
-            marginTop(16.px)
-        }
-    }) {
+    Div({ style { marginTop(16.px) } }) {
         steps.forEachIndexed { index, step ->
             P {
-
                 Text("${index + 1}. ")
                 Text(step)
             }

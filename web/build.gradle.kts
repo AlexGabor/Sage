@@ -1,7 +1,7 @@
 // Add compose gradle plugin
 plugins {
     kotlin("multiplatform")
-    id("org.jetbrains.compose") version "1.0.0-beta5"
+    id("org.jetbrains.compose") version "1.0.1-rc2"
 }
 
 // Add maven repositories
@@ -24,7 +24,6 @@ kotlin {
                 implementation(project(":common"))
                 implementation(project(":commonUi"))
                 implementation(compose.web.core)
-                implementation(compose.web.widgets)
                 implementation(compose.runtime)
             }
         }
