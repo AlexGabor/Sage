@@ -6,38 +6,57 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import kotlinx.browser.window
-import com.alexgabor.common.model.Recipe as RecipeModel
 
-class NavigatorState {
-    private val _screen: MutableState<Screen> = mutableStateOf(Screen.List)
-    val screen: State<Screen> = _screen
+class NavigatorState(
+    private val root: Route,
+    private val routes: List<Route> = emptyList()
+) {
+
+    private val _destination: MutableState<Destination> = mutableStateOf(root.toDestination(this))
+    val destination: State<Destination> = _destination
 
     init {
         evaluateLocation(window.location.pathname)
         setOnBackListener()
     }
 
-    fun navigateTo(screen: Screen) {
-        window.history.pushState(screen, screen.title, url = screen.url)
-        this._screen.value = screen
+    fun navigateTo(action: String, replace: Boolean = false) {
+        val destination = findDestination(action, routes)
+        if (!replace) {
+            window.history.pushState(action, destination.route.title, url = action)
+        } else {
+            window.history.replaceState(action, destination.route.title, url = action)
+        }
+
+        this._destination.value = destination
     }
 
     fun goBack() {
         window.history.back()
     }
 
-    fun redirectToRoot() {
-        window.history.replaceState(Screen.List, Screen.List.title, Screen.List.url)
-        _screen.value = Screen.List
+    private fun findDestination(pathname: String, routes: List<Route>): Destination {
+        val segments = pathname.split("/").filter { it.isNotEmpty() }
+        screen@ for (route in routes) {
+            val routeSegments = route.url.split("/").filter { it.isNotEmpty() }
+            if (routeSegments.size != segments.size) continue
+            val capturedSegments = mutableMapOf<String, String>()
+            for (index in segments.indices) {
+                when {
+                    routeSegments[index].startsWith("{") -> {
+                        val name = routeSegments[index].drop(1).dropLast(1)
+                        capturedSegments[name] = segments[index]
+                    }
+                    routeSegments[index] != segments[index] -> continue@screen
+                }
+            }
+            return route.toDestination(this, capturedSegments)
+        }
+        return root.toDestination(this)
     }
 
     private fun evaluateLocation(pathname: String) {
-        val segments = pathname.split("/").filter { it.isNotEmpty() }
-        if (pathname.isNotEmpty() && segments.size == 1) {
-            _screen.value = Screen.RecipeLink(segments[0])
-        } else {
-            _screen.value = Screen.List
-        }
+        _destination.value = findDestination(pathname, routes)
     }
 
     private fun setOnBackListener() {
@@ -48,34 +67,45 @@ class NavigatorState {
 }
 
 @Composable
-fun rememberNavigatorState(): NavigatorState = remember { NavigatorState() }
+fun rememberNavigationState(root: Route, routes: List<Route>): NavigatorState {
+    return remember { NavigatorState(root, routes) }
+}
 
 @Composable
 fun Navigator() {
-    val navigatorState = rememberNavigatorState()
-
-    when (val screen = navigatorState.screen.value) {
-        Screen.List -> RecipeListScreen(onClick = { recipe ->
-            navigatorState.navigateTo(Screen.Recipe(recipe))
+    val routes = buildList {
+        add(Route("Recipes", "/") { navigatorState, _ -> RecipeListScreen(navigatorState) })
+        add(Route("Recipe", "/{name}") { navigatorState, captured ->
+            RecipeDetailScreen(navigatorState, captured["name"])
         })
-        is Screen.Recipe -> {
-            RecipeDetailScreen(screen.recipe)
-        }
-        is Screen.RecipeLink -> {
-            RecipeDetailScreen(screen.pathname) {
-                navigatorState.redirectToRoot()
-            }
-        }
+    }
+    val navigationState = rememberNavigationState(routes[0], routes)
+
+    navigationState.destination.value.Content()
+}
+
+data class Route(
+    val title: String,
+    val url: String,
+    val content: @Composable (NavigatorState, Map<String, String>) -> Unit,
+)
+
+data class Destination(
+    val navigatorState: NavigatorState,
+    val capturedPaths: Map<String, String>,
+    val route: Route,
+) {
+    @Composable fun Content() {
+        route.content(navigatorState, capturedPaths)
     }
 }
 
-fun String.toPathname(): String {
-    return this.lowercase().replace(" ", "-")
+fun Route.toDestination(
+    navigatorState: NavigatorState,
+    capturedPaths: Map<String, String> = emptyMap()
+): Destination {
+    return Destination(navigatorState, capturedPaths, this)
 }
 
-sealed class Screen(val title: String, val url: String) {
-    object List : Screen("Recipes", "/")
-    class Recipe(val recipe: RecipeModel) : Screen(recipe.name, recipe.name.toPathname())
-    class RecipeLink(val pathname: String) : Screen("", pathname)
-}
+fun String.toPathname(): String = this.lowercase().replace(" ", "-")
 

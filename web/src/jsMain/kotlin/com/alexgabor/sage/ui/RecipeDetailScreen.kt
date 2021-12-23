@@ -51,15 +51,19 @@ fun Steps(steps: List<String>) {
 }
 
 @Composable
-fun RecipeDetailScreen(pathname: String, onNotFound: () -> Unit) {
+fun RecipeDetailScreen(navigatorState: NavigatorState, pathname: String?) {
+    if (pathname == null) {
+        navigatorState.navigateTo("/", replace = true)
+        return
+    }
     val getRecipes = remember { GetRecipes() }
     val recipes by getRecipes.recipes.collectAsState()
 
-    val recipe = remember(pathname) { recipes.find { it.name.toPathname() == pathname } }
+    val recipe = recipes.find { it.name.toPathname() == pathname }
 
     if (recipe != null) {
         RecipeDetailScreen(recipe)
     } else {
-        onNotFound()
+        navigatorState.navigateTo("/", replace = true)
     }
 }

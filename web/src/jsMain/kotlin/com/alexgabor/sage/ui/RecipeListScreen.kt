@@ -22,3 +22,10 @@ fun RecipeListScreen(onClick: (recipe: Recipe) -> Unit) {
         RecipeList(recipes, onClick)
     }
 }
+
+@Composable
+fun RecipeListScreen(navigatorState: NavigatorState) {
+    RecipeListScreen {
+        navigatorState.navigateTo(it.name.toPathname())
+    }
+}
