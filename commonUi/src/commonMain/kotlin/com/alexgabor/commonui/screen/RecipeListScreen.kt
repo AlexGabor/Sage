@@ -1,4 +1,4 @@
-package com.alexgabor.sage.ui
+package com.alexgabor.commonui.screen
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -20,12 +20,5 @@ fun RecipeListScreen(onClick: (recipe: Recipe) -> Unit) {
         VerticalSpace(16)
         Title("Sage")
         RecipeList(recipes, onClick)
-    }
-}
-
-@Composable
-fun RecipeListScreen(navigatorState: NavigatorState) {
-    RecipeListScreen {
-        navigatorState.navigateTo(it.name.toPathname())
     }
 }

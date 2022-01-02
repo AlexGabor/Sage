@@ -1,6 +1,8 @@
 package com.alexgabor.sage.ui
 
 import androidx.compose.runtime.Composable
+import com.alexgabor.commonui.navigation.NavigationRoot
+import com.alexgabor.commonui.screen.SageNavigation
 import org.jetbrains.compose.web.css.Color
 import org.jetbrains.compose.web.css.backgroundColor
 import org.jetbrains.compose.web.css.height
@@ -24,7 +26,9 @@ fun SageApp() {
                 width(100.percent)
             }
         }) {
-            Navigator()
+            NavigationRoot {
+                SageNavigation()
+            }
         }
     }
 }
