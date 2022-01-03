@@ -18,7 +18,7 @@ actual fun Ingredients(ingredients: List<Ingredient>) {
 }
 
 @Composable
-fun Steps(steps: List<String>) {
+actual fun Steps(steps: List<String>) {
     Box(Modifier.padding(top = 16.dp)) {
         steps.forEachIndexed { index, step ->
             BasicText("${index + 1}. $step")
