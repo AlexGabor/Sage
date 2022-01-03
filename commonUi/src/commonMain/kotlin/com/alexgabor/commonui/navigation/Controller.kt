@@ -4,9 +4,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 
-class NavigationController<T : Destination> {
+class NavigationController<T : Destination>(initial: T?) {
 
-    private val _destination = MutableStateFlow<T?>(null)
+    private val _destination = MutableStateFlow<T?>(initial)
     val destination: StateFlow<T?> = _destination
 
     private val history: NavigationHistory<T> = NavigationHistory()
@@ -20,5 +20,5 @@ class NavigationController<T : Destination> {
 }
 
 interface Destination {
-    val url: String
+    val path: String
 }

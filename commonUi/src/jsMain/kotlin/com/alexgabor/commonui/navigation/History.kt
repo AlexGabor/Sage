@@ -12,7 +12,7 @@ actual class NavigationHistory<T : Destination> {
     }
 
     actual fun push(destination: T) {
-        window.history.pushState(destination, "", url = destination.url)
+        window.history.pushState(destination, "", url = window.location.origin + destination.path)
         stack.add(destination)
     }
 }

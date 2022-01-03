@@ -17,7 +17,7 @@ fun SageApp() {
         style {
             minHeight(100.percent)
             width(100.percent)
-            backgroundColor(value = Color("e8dcd1"))
+            backgroundColor(value = Color("#e8dcd1"))
         }
     }) {
         Div({
