@@ -1,6 +1,8 @@
 package com.alexgabor.sage.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import com.alexgabor.commonui.navigation.JsBackDispatcher
 import com.alexgabor.commonui.navigation.NavigationRoot
 import com.alexgabor.commonui.screen.SageNavigation
 import org.jetbrains.compose.web.css.Color
@@ -26,7 +28,8 @@ fun SageApp() {
                 width(100.percent)
             }
         }) {
-            NavigationRoot {
+            val backDispatcher = remember { JsBackDispatcher() }
+            NavigationRoot(backDispatcher) {
                 SageNavigation()
             }
         }

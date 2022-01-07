@@ -16,7 +16,11 @@ class NavigationController<T : Destination>(initial: T?) {
         _destination.value = destination
     }
 
-    fun goBack(): T? = history.pop()
+    fun goBack(): T? {
+        return history.pop().also {
+            _destination.value = history.peek()
+        }
+    }
 }
 
 interface Destination {
