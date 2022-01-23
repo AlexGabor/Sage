@@ -21,6 +21,12 @@ class NavigationController<T : Destination>(initial: T?) {
             _destination.value = history.peek()
         }
     }
+
+    fun goForward(): T? {
+        return history.push().also {
+            _destination.value = history.peek()
+        }
+    }
 }
 
 interface Destination {

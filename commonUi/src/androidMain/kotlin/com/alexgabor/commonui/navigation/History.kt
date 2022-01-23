@@ -15,4 +15,6 @@ actual class NavigationHistory<T : Destination> {
     actual fun push(destination: T) {
         stack.add(destination)
     }
+
+    actual fun push(): T? = null
 }

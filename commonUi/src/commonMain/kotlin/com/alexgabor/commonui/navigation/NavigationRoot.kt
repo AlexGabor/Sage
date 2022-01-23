@@ -15,6 +15,6 @@ fun NavigationRoot(backDispatcher: BackDispatcher? = null, content: @Composable 
     )
 }
 
-private fun BackDispatcher.createBackHandler(backDispatcherScope: CoroutineScope): BackHandler {
-    return BackHandler(backDispatcherScope, this)
+private fun BackDispatcher.createBackHandler(backDispatcherScope: CoroutineScope): PopStateHandler {
+    return PopStateHandler(backDispatcherScope, this)
 }

@@ -4,15 +4,16 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-value class Handler(val callback: () -> Boolean)
+value class Handler(val callback: (Direction) -> Boolean)
+enum class Direction { Forward, Back }
 
-class BackHandler(scope: CoroutineScope, backDispatcher: BackDispatcher) {
+class PopStateHandler(scope: CoroutineScope, backDispatcher: BackDispatcher) {
     private val handlers = mutableListOf<Handler>()
 
     init {
         scope.launch {
             backDispatcher.backEvents.collect {
-                dispatch()
+                dispatch(it)
             }
         }
     }
@@ -25,9 +26,9 @@ class BackHandler(scope: CoroutineScope, backDispatcher: BackDispatcher) {
         handlers.remove(handler)
     }
 
-    private fun dispatch(): Boolean {
+    private fun dispatch(direction: Direction): Boolean {
         for (handler in handlers) {
-            if (handler.callback.invoke()) {
+            if (handler.callback.invoke(direction)) {
                 return true
             }
         }
@@ -36,5 +37,5 @@ class BackHandler(scope: CoroutineScope, backDispatcher: BackDispatcher) {
 }
 
 interface BackDispatcher {
-    val backEvents: Flow<Unit>
+    val backEvents: Flow<Direction>
 }

@@ -5,12 +5,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import com.alexgabor.common.model.Recipe
-import com.alexgabor.commonui.navigation.BackHandler
-import com.alexgabor.commonui.navigation.Destination
-import com.alexgabor.commonui.navigation.Handler
-import com.alexgabor.commonui.navigation.LocalBackHandler
-import com.alexgabor.commonui.navigation.LocalUrl
-import com.alexgabor.commonui.navigation.NavigationController
+import com.alexgabor.commonui.navigation.*
 
 sealed class Page(override val path: String) : Destination {
     object List : Page("/")
@@ -20,14 +15,14 @@ sealed class Page(override val path: String) : Destination {
 
 @Composable
 fun <T : Destination> registerBackHandler(
-    backHandler: BackHandler,
+    popStateHandler: PopStateHandler,
     controller: NavigationController<T>
 ) {
-    DisposableEffect(backHandler, controller) {
-        val handler = Handler { println("handler"); controller.goBack() != null }
-        backHandler.register(handler)
+    DisposableEffect(popStateHandler, controller) {
+        val handler = Handler { if (it == Direction.Back) controller.goBack() != null else controller.goForward() != null }
+        popStateHandler.register(handler)
         onDispose {
-            backHandler.unregister(handler)
+            popStateHandler.unregister(handler)
         }
     }
 }
