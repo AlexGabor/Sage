@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import com.alexgabor.common.model.Recipe
 
 @Composable
-actual fun RecipePreview(recipe: Recipe, onClick: () -> Unit) {
+fun RecipePreview(recipe: Recipe, onClick: () -> Unit) {
     BasicText(recipe.name,
         modifier = Modifier.clickable(onClick = onClick).padding(16.dp))
 }

@@ -9,7 +9,7 @@ import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
-actual fun Ingredients(ingredients: List<Ingredient>) {
+fun Ingredients(ingredients: List<Ingredient>) {
     Div({ style { marginTop(16.px) } }) {
         ingredients.forEach {
             P { Text("${it.quantity} ${it.name}") }
@@ -18,7 +18,7 @@ actual fun Ingredients(ingredients: List<Ingredient>) {
 }
 
 @Composable
-actual fun Steps(steps: List<String>) {
+fun Steps(steps: List<String>) {
     Div({ style { marginTop(16.px) } }) {
         steps.forEachIndexed { index, step ->
             P {

@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-actual fun Divider(size: Int) {
+fun Divider(size: Int) {
     Spacer(modifier = Modifier
         .fillMaxWidth()
         .height(size.dp)

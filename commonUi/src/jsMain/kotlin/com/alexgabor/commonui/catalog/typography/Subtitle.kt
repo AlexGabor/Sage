@@ -6,7 +6,7 @@ import org.jetbrains.compose.web.dom.H1
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
-actual fun Subtitle(text: String) {
+fun Subtitle(text: String) {
     Divider(1)
     H1 {
         Text(text)

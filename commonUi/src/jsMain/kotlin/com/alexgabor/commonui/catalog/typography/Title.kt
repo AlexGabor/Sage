@@ -9,7 +9,7 @@ import org.jetbrains.compose.web.dom.H1
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
-actual fun Title(text: String) {
+fun Title(text: String) {
     Div({
         style {
             width(100.percent)

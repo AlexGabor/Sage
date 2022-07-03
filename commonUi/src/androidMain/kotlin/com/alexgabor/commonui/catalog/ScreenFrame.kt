@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-actual fun ScreenFrame(content: @Composable () -> Unit) {
+fun ScreenFrame(content: @Composable () -> Unit) {
     Box(modifier = Modifier.fillMaxWidth()) {
         Box(
             modifier = Modifier.width(680.dp)

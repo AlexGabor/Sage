@@ -8,7 +8,7 @@ import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Div
 
 @Composable
-actual fun Divider(size: Int) {
+fun Divider(size: Int) {
     Div({
         style {
             backgroundColor(Color("#494949"))

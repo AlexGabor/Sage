@@ -8,7 +8,7 @@ import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
-actual fun RecipePreview(recipe: Recipe, onClick: () -> Unit) {
+fun RecipePreview(recipe: Recipe, onClick: () -> Unit) {
     P({
         onClick { onClick() }
         style {

@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import com.alexgabor.commonui.catalog.Divider
 
 @Composable
-actual fun Subtitle(text: String) {
+fun Subtitle(text: String) {
     Column(Modifier.fillMaxWidth()) {
         Divider(2)
         BasicText(text = text)

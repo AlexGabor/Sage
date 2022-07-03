@@ -6,6 +6,6 @@ import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Div
 
 @Composable
-actual fun VerticalSpace(height: Int) {
+fun VerticalSpace(height: Int) {
     Div({ style { height(height.px) } }) {}
 }

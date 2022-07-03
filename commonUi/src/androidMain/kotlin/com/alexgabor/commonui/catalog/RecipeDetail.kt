@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import com.alexgabor.common.model.Ingredient
 
 @Composable
-actual fun Ingredients(ingredients: List<Ingredient>) {
+fun Ingredients(ingredients: List<Ingredient>) {
     Box(Modifier.padding(top = 16.dp)) {
         ingredients.forEach {
             BasicText("${it.quantity} ${it.name}")
@@ -18,7 +18,7 @@ actual fun Ingredients(ingredients: List<Ingredient>) {
 }
 
 @Composable
-actual fun Steps(steps: List<String>) {
+fun Steps(steps: List<String>) {
     Box(Modifier.padding(top = 16.dp)) {
         steps.forEachIndexed { index, step ->
             BasicText("${index + 1}. $step")

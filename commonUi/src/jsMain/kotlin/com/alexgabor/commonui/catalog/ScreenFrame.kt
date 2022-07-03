@@ -8,7 +8,7 @@ import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Div
 
 @Composable
-actual fun ScreenFrame(content: @Composable () -> Unit) {
+fun ScreenFrame(content: @Composable () -> Unit) {
     Div({
         style {
             maxWidth(680.px)
