@@ -54,9 +54,7 @@ fun Navigator() {
     val navigatorState = rememberNavigatorState()
 
     when (val screen = navigatorState.screen.value) {
-        Screen.List -> RecipeListScreen(onClick = { recipe ->
-            navigatorState.navigateTo(Screen.Recipe(recipe))
-        })
+        Screen.List -> RecipeListScreen()
         is Screen.Recipe -> {
             RecipeDetailScreen(screen.recipe)
         }

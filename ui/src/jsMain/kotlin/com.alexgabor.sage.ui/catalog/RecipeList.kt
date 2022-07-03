@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import com.alexgabor.sage.common.model.Recipe
 
 @Composable
-fun RecipeList(recipes: List<Recipe>, onClick: (recipe: Recipe) -> Unit) {
+fun RecipeList(recipes: List<Recipe>) {
     recipes.forEach { recipe ->
-        RecipePreview(recipe, onClick = { onClick(recipe) })
+        RecipePreview(recipe)
     }
 }
