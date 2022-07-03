@@ -11,7 +11,7 @@ import org.jetbrains.compose.web.dom.Div
 fun Divider(size: Int) {
     Div({
         style {
-            backgroundColor(Color("#494949"))
+            backgroundColor(Color("#31334a"))
             height(size.px)
         }
     }) {
