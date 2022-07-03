@@ -1,10 +1,7 @@
 package com.alexgabor.sage.ui.catalog
 
 import androidx.compose.runtime.Composable
-import org.jetbrains.compose.web.css.marginLeft
-import org.jetbrains.compose.web.css.marginRight
-import org.jetbrains.compose.web.css.maxWidth
-import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div
 
 @Composable
@@ -19,6 +16,7 @@ fun ScreenFrame(content: @Composable () -> Unit) {
             style {
                 marginLeft(16.px)
                 marginRight(16.px)
+                paddingBottom(64.px)
             }
         }) {
             content()
