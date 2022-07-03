@@ -1,11 +1,7 @@
 package com.alexgabor.commonui.screen
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import com.alexgabor.common.model.Recipe
-import com.alexgabor.common.usecase.GetRecipes
 import com.alexgabor.commonui.catalog.Ingredients
 import com.alexgabor.commonui.catalog.ScreenFrame
 import com.alexgabor.commonui.catalog.Steps
@@ -23,23 +19,5 @@ fun RecipeDetailScreen(recipe: Recipe) {
         Subtitle(recipe.name)
         Ingredients(recipe.ingredients)
         Steps(recipe.steps)
-    }
-}
-
-@Composable
-fun RecipeDetailScreen(pathname: String?, onNotFound: () -> Unit) {
-    if (pathname == null) {
-        onNotFound.invoke()
-        return
-    }
-    val getRecipes = remember { GetRecipes() }
-    val recipes by getRecipes.recipes.collectAsState()
-
-    val recipe = recipes.find { it.toPath() == pathname }
-
-    if (recipe != null) {
-        RecipeDetailScreen(recipe)
-    } else {
-        onNotFound()
     }
 }
