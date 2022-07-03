@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("org.jetbrains.compose") version "1.0.1-rc2"
+    id("org.jetbrains.compose") version "1.1.0"
 }
 
 android {
@@ -39,8 +39,8 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":common"))
-    implementation(project(":commonUi"))
+//    implementation(project(":common"))
+//    implementation(project(":commonUi"))
 
     implementation(libs.kotlinx.coroutines)
     implementation(libs.androidx.core)
