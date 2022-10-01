@@ -1,26 +1,11 @@
 package com.alexgabor.sage.pages
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import com.alexgabor.sage.ui.screen.RecipeListScreen
 import com.varabyte.kobweb.core.Page
-import com.alexgabor.sage.components.layouts.PageLayout
-import org.jetbrains.compose.web.attributes.InputType
-import org.jetbrains.compose.web.dom.Input
-import org.jetbrains.compose.web.dom.P
-import org.jetbrains.compose.web.dom.Text
 
 @Page
 @Composable
 fun HomePage() {
-    PageLayout("Welcome to Kobweb!") {
-        Text("Please enter your name")
-        var name by remember { mutableStateOf("") }
-        Input(
-            InputType.Text,
-            attrs = {
-                onInput { e -> name = e.value }
-            }
-        )
-        P()
-        Text("Hello ${name.takeIf { it.isNotBlank() } ?: "World"}!")
-    }
+    RecipeListScreen()
 }

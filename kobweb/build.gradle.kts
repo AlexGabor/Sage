@@ -1,3 +1,5 @@
+import kotlinx.html.link
+
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose") version "1.1.0"
@@ -18,6 +20,15 @@ version = "1.0-SNAPSHOT"
 kobweb {
     index {
         description.set("Powered by Kobweb")
+        head.set(listOf {
+            link(rel = "stylesheet", href = "/root.css")
+            link(rel = "preconnect", href = "https://fonts.googleapis.com")
+            link(rel = "preconnect", href = "https://fonts.gstatic.com")
+            link(
+                rel = "stylesheet",
+                href = "https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,300;0,500;1,600&display=swap"
+            )
+        })
     }
 }
 
@@ -34,12 +45,12 @@ kotlin {
     sourceSets {
         val jsMain by getting {
             dependencies {
+                implementation(project(":ui"))
                 implementation(compose.web.core)
                 implementation(libs.kobweb.core)
                 implementation(libs.kobweb.silk.core)
-                implementation(libs.kobweb.silk.icons.fa)
                 implementation(libs.kobwebx.markdown)
-             }
+            }
         }
     }
 }
