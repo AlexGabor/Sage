@@ -1,0 +1,13 @@
+site:
+  title: "Sage"
+
+server:
+  files:
+    dev:
+      contentRoot: "build/processedResources/js/main/public"
+      script: "../build/js/packages/kobweb/kotlin/kobweb.js"
+      api: "build/libs/kobweb.jar"
+    prod:
+      siteRoot: ".kobweb/site"
+
+  port: 8080
