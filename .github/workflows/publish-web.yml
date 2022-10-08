@@ -22,8 +22,23 @@ jobs:
         id: tag
         run: echo "::set-output name=tag::$(git describe --exact-match --tags HEAD)"
 
-      - name: Test and Build
-        run: ./gradlew web:buildGhPages
+      # Installing Kobweb with brew
+      - name: Install Kobweb
+        run: |
+          wget https://github.com/varabyte/kobweb/releases/download/cli-v0.9.9/kobweb-0.9.9.zip
+          unzip kobweb-0.9.9.zip
+          echo "${GITHUB_WORKSPACE}/kobweb-0.9.9/bin" >> $GITHUB_PATH
+
+      # Validate wrapper
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1.0.3
+
+      # Build application
+      - name: Build
+        run: |
+          cd kobweb
+          kobweb version
+          kobweb export --layout static --mode dumb
 
       # If main branch update, deploy to gh-pages
       - name: Publish
@@ -31,7 +46,7 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: web/build/ghPages # The folder the action should deploy.
+          FOLDER: kobweb/build/site # The folder the action should deploy.
           CLEAN: true # Automatically remove deleted files from the deploy branch
           CLEAN_EXCLUDE: "CNAME" # Automatically remove deleted files from the deploy branch
           COMMIT_MESSAGE: "Release ${{ steps.tag.outputs.tag }}"

@@ -8,6 +8,6 @@ server:
       script: "../build/js/packages/kobweb/kotlin/kobweb.js"
       api: "build/libs/kobweb.jar"
     prod:
-      siteRoot: ".kobweb/site"
+      siteRoot: "build/site"
 
   port: 8080
