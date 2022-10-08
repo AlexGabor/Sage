@@ -1,11 +1,11 @@
-package com.alexgabor.sage
+package com.alexgabor.sage.ui.catalog
 
 import androidx.compose.runtime.Composable
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div
 
 @Composable
-fun SageApp() {
+fun Root(content: @Composable () -> Unit) {
     Div({
         style {
             minHeight(100.percent)
@@ -13,6 +13,6 @@ fun SageApp() {
             color(Color("#31334a"))
         }
     }) {
-//        Navigator()
+        content()
     }
 }

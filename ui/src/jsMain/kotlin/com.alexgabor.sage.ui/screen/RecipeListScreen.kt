@@ -1,23 +1,14 @@
 package com.alexgabor.sage.ui.screen
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import com.alexgabor.sage.common.usecase.GetRecipes
-import com.alexgabor.sage.ui.catalog.RecipeList
-import com.alexgabor.sage.ui.catalog.ScreenFrame
-import com.alexgabor.sage.ui.catalog.VerticalSpace
-import com.alexgabor.sage.ui.catalog.typography.Title
+import com.alexgabor.sage.ui.catalog.*
+
 
 @Composable
-fun RecipeListScreen() {
-    val getRecipes = remember { GetRecipes() }
-    val recipes by getRecipes.recipes.collectAsState()
-
-    ScreenFrame {
-        VerticalSpace(16)
-        Title("Sage")
-        RecipeList(recipes)
+fun RecipeListScreen(recipes: List<LinkModel>) {
+    Screen {
+        recipes.forEach { recipe ->
+            ItemLink(recipe)
+        }
     }
 }
