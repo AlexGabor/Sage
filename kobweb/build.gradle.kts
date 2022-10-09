@@ -1,4 +1,5 @@
 import kotlinx.html.link
+import kotlinx.html.meta
 
 plugins {
     kotlin("multiplatform")
@@ -21,6 +22,7 @@ kobweb {
     index {
         description.set("Powered by Kobweb")
         head.set(listOf {
+            meta(name = "viewport", content = "width=device-width, initial-scale=1.0")
             link(rel = "stylesheet", href = "/root.css")
             link(rel = "preconnect", href = "https://fonts.googleapis.com")
             link(rel = "preconnect", href = "https://fonts.gstatic.com")
